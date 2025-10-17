@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+</head>
+<body>
+    <h2>Enter House Details</h2>
+    <form action="/predict" method="POST">
+        {% for feat in feature_meta %}
+            <label>{{ feat.field }}:</label>
+            {% if feat.type == 'numeric' %}
+                <input type="number" step="any" name="{{ feat.field }}" required><br><br>
+            {% else %}
+                <select name="{{ feat.field }}">
+                    {% for opt in feat.options %}
+                        <option value="{{ opt }}">{{ opt }}</option>
+                    {% endfor %}
+                </select><br><br>
+            {% endif %}
+        {% endfor %}
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
